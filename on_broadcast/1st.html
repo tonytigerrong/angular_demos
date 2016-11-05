@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+<h5>Function:<br>Broadcast a message, and get it</h5>
+<h5>Using $rootScope to broadcast, Using $scope of controller to handle it($on)</h5>
+	<div data-ng-app='mainApp' data-ng-controller='my1stController'>
+		<span ng-bind='message'></span><br/>
+		<span ng-bind='messageRoot'></span><br/>
+		<button ng-click="fire2CurrectScope()">broadcast a message "hello gays"</button>
+	</div>
+<script>
+	var mainApp = angular.module("mainApp",[]);
+	var my1stController = mainApp.controller("my1stController",function($scope,$rootScope){
+		$scope.message = " $scope's message is : ";
+		 
+		$scope.fire2CurrectScope = function(){
+			$scope.$broadcast('broadcastName',{param:{"name":"tony rong","message":"hello gays"}});
+		}
+		 
+		$scope.$on('broadcastName',function(event,args){
+			$scope.message += args.param.name + " " + args.param.message;
+		});
+	});
+	 
+</script>
+</body>
+</html>

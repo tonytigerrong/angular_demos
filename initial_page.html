@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+<div ng-app='mainApp' ng-controller='my1stController'>
+<span ng-bind='message'></span>
+</div>
+<script>
+	var mainApp = angular.module("mainApp",[]);
+	var my1stController = mainApp.controller("my1stController",function($scope){
+		$scope.message = "null";
+	});
+</script>
+</body>
+</html>

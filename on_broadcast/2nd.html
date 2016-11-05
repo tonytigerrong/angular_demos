@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>nested controller broadcast and listening</title>
+</head>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<h5>.$on(name, listener) - Listens for a specific event by a given name</h5>
+<h5>.$broadcast(name, args) - Broadcast an event down through the $scope of all children</h5>
+<h5>.$emit(name, args) - Emit an event up the $scope hierarchy to all parents, including the $rootScope</h5>
+<h4>there are 3 controllers (1-3); </h4>
+<h4>from controller1, we broadcast a event1 to downstream </h4>
+<h4>from controller3, we emit a event2 to upstream</h4>
+<body ng-app='mainApp'>
+
+	<div ng-controller='controller1'>
+	<button ng-click="broadcast()">broad cast 1</button>
+	<button ng-click="emit()">emit 1</button>
+
+		<div ng-controller='controller2'>
+		<button ng-click="broadcast()">broad cast 2</button>
+		<button ng-click="emit()">emit 3</button>
+
+			<div ng-controller='controller3'>
+			<button ng-click="broadcast()">broad cast 3</button>
+			<button ng-click="emit()">emit 3</button>
+
+			</div>
+
+		</div>
+
+	</div>
+<script>
+	var mainApp = angular.module("mainApp",[]);
+	var broadcastHandler = function(event,args){
+		console.log("broadcastHandler: " + args.data);
+	};
+	var emitHandler = function(event,args){
+		console.log("emitHandler: " + args.data);
+	};
+	var controller1 = mainApp.controller('controller1',['$scope','$rootScope',function($scope,$rootScope){
+			$scope.broadcast = function(){
+				$scope.$broadcast('event1',{data: ' :  broadcast data from controller1'})
+			};
+	 
+			$scope.$on('event1',broadcastHandler);
+			$rootScope.$on('event2',emitHandler);
+	}]);
+	var controller2 = mainApp.controller('controller2',['$scope','$rootScope',function($scope,$rootScope){
+		 
+			$scope.$on('event1',broadcastHandler);
+	}]);
+	var controller3 = mainApp.controller('controller3',['$scope','$rootScope',function($scope,$rootScope){
+		 
+			$scope.emit = function(){
+				$rootScope.$emit('event2',{data: ' : emit data from controller3'})
+			};
+			$scope.$on('event1',broadcastHandler);
+	}]);
+</script>
+</body>
+</html>
