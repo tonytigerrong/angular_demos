@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+	<div ng-app='mainApp' ng-controller='cntrl'>
+		
+	</div>
+	<script>
+
+		var mainApp = angular.module('mainApp',[]);
+		var cntrl   = mainApp.controller('cntrl',['$scope','$rootScope',function($scope,$rootScope){
+			/*
+			 * inheritance demo of scope, impact downstream
+			 */
+			var parent = $scope;
+			var child  = parent.$new();
+			parent.msg = "hello";
+			console.log(child.msg); // should be hello (inheritanced)
+			// expect(child.msg).toEqual('hello');
+			child.msg = "world";
+			console.log(parent.msg); // should be hello ( no impact to parent )
+
+			/*
+			 * $watch demo
+			 */
+			 
+			 $scope.name = "tony";
+			 $scope.counter = 0;
+			 $scope.$watch('name',function(newVal,oldVal){
+			 	console.log('newVal: ' + newVal + ";  oldVal: " + oldVal);
+			 	$scope.counter += 1;
+			 });
+			 $scope.name = "tony1";
+			 $scope.$apply(); // why there is exception throwed ????????
+			 $scope.name = "tony12";
+			 $scope.$apply();
+			 $scope.name = "tony123";
+			 $scope.$apply();
+			 console.log('$scope.counter: ' + $scope.counter);
+
+
+		}]);
+		
+	</script>
+</body>
+</html>

@@ -1,7 +1,15 @@
+./scope (appending)
+keywords: $new inheritance $watch 
 https://docs.angularjs.org/api/ng/type/$rootScope.Scope
-https://docs.angularjs.org/guide/$location
-https://github.com/dhaazen/JSTutorial
 
 ./on_broadcast
 keywords: $scope $rootScope $broadcast $emit
 http://stackoverflow.com/questions/19446755/on-and-broadcast-in-angular
+
+
+
+
+
+
+https://docs.angularjs.org/guide/$location
+https://github.com/dhaazen/JSTutorial
