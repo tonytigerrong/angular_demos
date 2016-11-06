@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<base href="/"/>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	 <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+</head>
+<body>
+
+<div ng-app='mainApp' ng-controller='myCntrl'>
+	<button  ng-click="rootScope('../todo.txt')">{{link}}</button>
+	<button  ng-click="rootScope('./todo.txt')">{{link2}}</button>
+</div>
+<script>
+	var mainApp = angular.module("mainApp",['ngRoute']);
+	mainApp.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
+		// $routeProvider
+		// 	.when(
+		// 		'/rootScope.html',{
+		// 			// template: 'this is /rootScope'
+		// 		redirectTo: '../scope/rootScope.html'
+		// 	})
+		// 	.when(
+		// 		'/todo.txt',{
+		// 		redirectTo: '/todo.txt'
+		// 	})
+		// 	.otherwise(
+		// 		'/readme',{
+		// 		redirectTo: '../README.md'
+		// 	});
+		
+			$locationProvider.html5Mode(true);//.hasPrefix('!');
+	}]);
+	mainApp.controller('myCntrl',function($scope,$location,$route,$window){
+			$scope.link = '../todo.txt';
+			$scope.link2 = './todo.txt';
+			var path = $location.absUrl();
+			console.log(path);
+			path = $location.path();
+			console.log(path);
+			$scope.rootScope = function(url){
+				console.log(url);
+				$location.path(path+url);
+				// $route.reload(); //doesn't work
+				$window.location.reload();
+			};
+	});
+
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-./scope (appending)
+./scope 
 keywords: $new inheritance $watch 
 https://docs.angularjs.org/api/ng/type/$rootScope.Scope
 
@@ -6,10 +6,9 @@ https://docs.angularjs.org/api/ng/type/$rootScope.Scope
 keywords: $scope $rootScope $broadcast $emit
 http://stackoverflow.com/questions/19446755/on-and-broadcast-in-angular
 
-
-
-
-
-
+./location/index.html
+Keywords: $location path absUrl $window.location.reload();
 https://docs.angularjs.org/guide/$location
+
+--
 https://github.com/dhaazen/JSTutorial
